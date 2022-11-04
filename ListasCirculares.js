@@ -58,9 +58,29 @@ class RutaTransporte{
         }   
     }
 
-    eliminar()
+    eliminar(nombre)
     {
+        let temp = this.primero.sig;
+        
+        if(this.primero.nombre === nombre)
+        {
+            this.primero.ant.sig = this.primero.sig
+            this.primero.sig.ant = this.primero.ant; 
+            this.primero = this.primero.sig; 
+        }
+        else
+        {
+            while(temp.nombre !== this.primero.nombre)
+            {
+                if(temp.nombre === nombre)
+                {
+                    temp.ant.sig = temp.sig; 
+                    temp.sig.ant = temp.ant; 
+                }
+                temp = temp.sig; 
+            }
 
+        }
     }
 
     imprimir()
@@ -90,3 +110,5 @@ ruta.agregar(base);
 
 console.log(ruta.imprimir()); 
 console.log(ruta.buscar('B')); 
+ruta.eliminar('C'); 
+console.log(ruta.imprimir()); 
