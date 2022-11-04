@@ -29,6 +29,8 @@ class RutaTransporte{
             this.primero.ant.sig = base; 
             this.primero.ant = base; 
         }
+
+        return this.primero; 
     }
 
     buscar()
@@ -44,5 +46,27 @@ class RutaTransporte{
     imprimir()
     {
 
+        let listaBases = `${this.primero.nombre} ${this.primero.minutos} `; 
+        let temp = this.primero.sig;
+
+        while(temp.nombre !== this.primero.nombre){
+            listaBases += `${temp.nombre} ${temp.minutos} `;
+            temp = temp.sig;
+        }  
+
+        return listaBases; 
     }
 }
+
+let base = new Base('A', 120); 
+let ruta = new RutaTransporte();
+
+ruta.agregar(base); 
+
+base = new Base('B', 180); 
+ruta.agregar(base); 
+
+base = new Base('C', 240); 
+ruta.agregar(base);
+
+console.log(ruta.imprimir()); 
