@@ -95,20 +95,52 @@ class RutaTransporte{
 
         return listaBases; 
     }
+
+    recorrido(baseInicio, horaInicio, minutoInicio, horaFin, minutoFin)
+    {
+        let recorridoBase = ""; 
+        let temp = this.primero;
+        let bandera = false; 
+        let totalInicio = minutoInicio = (horaInicio*60) + minutoInicio; 
+        let totalFin = minutoFin = (horaFin*60) + minutoFin; 
+
+        while(temp.sig.nombre !== baseInicio)
+        {
+            temp = temp.sig; 
+        }
+       
+        while(bandera === false)
+        {
+            temp = temp.sig; 
+            if(totalInicio+temp.sig.minutos > totalFin)
+            {
+                bandera = true; 
+            }
+            else
+            {
+                totalInicio += temp.sig.minutos; 
+                recorridoBase += `${temp.nombre} Horas: ${Math.trunc(totalInicio/60)} Minutos: ${totalInicio%60} `;
+            }
+        }
+        return recorridoBase; 
+
+    }
 }
 
-let base = new Base('A', 120); 
+let base = new Base('A', 65); 
 let ruta = new RutaTransporte();
 
 ruta.agregar(base); 
 
-base = new Base('B', 180); 
+base = new Base('B', 30); 
 ruta.agregar(base); 
 
-base = new Base('C', 240); 
+base = new Base('C', 20); 
 ruta.agregar(base);
 
 console.log(ruta.imprimir()); 
-console.log(ruta.buscar('B')); 
-ruta.eliminar('C'); 
+console.log(ruta.buscar('A')); 
+console.log(ruta.recorrido('B', 5, 15, 7, 35)); 
+ruta.eliminar('C');  
 console.log(ruta.imprimir()); 
+
