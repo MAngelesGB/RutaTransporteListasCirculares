@@ -112,7 +112,7 @@ class RutaTransporte{
         while(bandera === false)
         {
             temp = temp.sig; 
-            if(totalInicio+temp.sig.minutos > totalFin)
+            if(totalInicio+temp.minutos > totalFin)
             {
                 bandera = true; 
             }
