@@ -98,13 +98,13 @@ class RutaTransporte{
 
     recorrido(baseInicio, horaInicio, minutoInicio, horaFin, minutoFin)
     {
-        let recorridoBase = ""; 
+        let recorridoBase = `${baseInicio} Horas: ${horaInicio} Minutos ${minutoInicio} `; 
         let temp = this.primero;
         let bandera = false; 
         let totalInicio = minutoInicio = (horaInicio*60) + minutoInicio; 
         let totalFin = minutoFin = (horaFin*60) + minutoFin; 
 
-        while(temp.sig.nombre !== baseInicio)
+        while(temp.nombre !== baseInicio)
         {
             temp = temp.sig; 
         }
@@ -118,7 +118,7 @@ class RutaTransporte{
             }
             else
             {
-                totalInicio += temp.sig.minutos; 
+                totalInicio += temp.minutos; 
                 recorridoBase += `${temp.nombre} Horas: ${Math.trunc(totalInicio/60)} Minutos: ${totalInicio%60} `;
             }
         }
